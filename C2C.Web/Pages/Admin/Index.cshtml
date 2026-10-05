@@ -1,0 +1,56 @@
+@page "/admin"
+@model C2C.Web.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "Submissions";
+}
+<section class="admin">
+    <div class="wrap">
+        <div class="bar admin-bar">
+            <h1>Submissions</h1>
+            <form method="post" asp-page-handler="Logout"><button class="btn btn-small" type="submit">Sign out</button></form>
+        </div>
+
+        <h2>Quote requests (@Model.Quotes.Count)</h2>
+        <div class="scroll">
+            <table>
+                <thead><tr><th>Received</th><th>Name</th><th>Contact</th><th>Services required</th><th>Start</th><th></th></tr></thead>
+                <tbody>
+                @foreach (var q in Model.Quotes)
+                {
+                    <tr class="@(q.Handled ? "done" : "")">
+                        <td>@q.CreatedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@q.FirstName @q.LastName</td>
+                        <td><a href="mailto:@q.Email">@q.Email</a><br />@q.Phone</td>
+                        <td>@q.ServicesRequired</td>
+                        <td>@q.StartTiming</td>
+                        <td><form method="post" asp-page-handler="ToggleQuote" asp-route-id="@q.Id" class="inline"><button class="link-btn">@(q.Handled ? "Reopen" : "Mark handled")</button></form></td>
+                    </tr>
+                }
+                @if (Model.Quotes.Count == 0) {<tr><td colspan="6">No quote requests yet.</td></tr>}
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Work With Us (@Model.Applications.Count)</h2>
+        <div class="scroll">
+            <table>
+                <thead><tr><th>Received</th><th>Company</th><th>Contact</th><th>Field</th><th>Profile</th><th>File</th><th></th></tr></thead>
+                <tbody>
+                @foreach (var a in Model.Applications)
+                {
+                    <tr class="@(a.Handled ? "done" : "")">
+                        <td>@a.CreatedUtc.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@a.Company</td>
+                        <td><a href="mailto:@a.Email">@a.Email</a><br />@a.Phone</td>
+                        <td>@a.Field</td>
+                        <td>@a.Profile</td>
+                        <td><a asp-page-handler="Download" asp-route-id="@a.Id">@a.OriginalFileName</a></td>
+                        <td><form method="post" asp-page-handler="ToggleApplication" asp-route-id="@a.Id" class="inline"><button class="link-btn">@(a.Handled ? "Reopen" : "Mark handled")</button></form></td>
+                    </tr>
+                }
+                @if (Model.Applications.Count == 0) {<tr><td colspan="7">No submissions yet.</td></tr>}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

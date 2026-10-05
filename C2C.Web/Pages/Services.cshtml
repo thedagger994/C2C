@@ -1,0 +1,60 @@
+@page "/services"
+@model ServicesModel
+@{
+    ViewData["Title"] = "Services";
+    ViewData["Description"] = "Structural design and analysis, quality verification, technical field testing, engineering procedures, quality audits and material inspections from C2C Lead Engineering.";
+    var services = new (string Title, string Image, string Alt, string[] Items)[]
+    {
+        ("Structural Design and Analysis", "drilling", "Drilling crew performing a soil investigation beside a rail corridor", new[] {
+            "Foundation design including spread footings, rafts, caissons, ground improvement, and piles",
+            "Soil Investigation including cone penetration testing, and boring testing",
+            "Shoring systems design including groundwater control shoring and diaphragm walls",
+            "Slope stability engineering including erosion and sediment control" }),
+        ("Quality Verification", "formwork-inspection", "Inspector measuring formwork on site", new[] {
+            "Mobile cranes and drilling pads", "Reinforcement steel placement", "False and form works",
+            "H-Piles and caisson foundations", "Excavation base and structural backfill (frost taper)",
+            "Bridge bearings", "Bridge expansion joints", "High mast light poles and over head signs" }),
+        ("Technical Field Testing", "slump-test", "Technician performing a concrete slump test", new[] {
+            "Testing of hot and cold asphalt mixes", "Water proofing inspections", "Concrete testing", "Grout testing" }),
+        ("Development of Engineering Procedures", "rebar-cage", "Reinforcing steel cage being assembled", new[] {
+            "Quality management plan (QMS)", "Temporary shoring procedure", "Caissons drilling procedure", "Hot and cold concrete pouring procedures" }),
+        ("Quality Audit", "overpass", "Completed highway overpass", new[] {
+            "Documents review", "Evaluation of quality management systems per ISO 9001:2015",
+            "Contractor quality management plan review", "Recommendations and opportunities for improvement" }),
+        ("Material Inspections", "expansion-joint", "Bridge expansion joint ready for concrete", new[] {
+            "Testing of granular and compaction", "Testing of concrete materials", "Fresh and hardened concrete testing",
+            "Soil testing", "Expansion joint checks" }),
+    };
+}
+
+<section class="page-hero">
+    @Img.Tag("concrete-pour", "", "100vw", null, true)
+    <div class="wrap">
+        <p class="eyebrow">Services</p>
+        <h1>We Offer a Range of Services to Meet Your Needs</h1>
+        <p>Quality is Our Priority.</p>
+    </div>
+</section>
+
+<section class="section alt">
+    <div class="wrap grid cols-3">
+        @foreach (var s in services)
+        {
+            <article class="card reveal">
+                <div class="photo">@Img.Tag(s.Image, s.Alt, "(max-width: 600px) 100vw, (max-width: 960px) 50vw, 380px")</div>
+                <div class="card-body">
+                    <h3>@s.Title</h3>
+                    <ul>@foreach (var i in s.Items) {<li>@i</li>}</ul>
+                </div>
+            </article>
+        }
+    </div>
+</section>
+
+<section class="cta-band">
+    <div class="wrap reveal">
+        <h2>Have a project in mind?</h2>
+        <p>Call <a class="link-light" href="tel:+19057491164">905-749-1164</a> or request a quote online.</p>
+        <div class="btn-row center-row" ><a class="btn btn-ghost" href="/get-a-quote#quote">Get a Quote</a></div>
+    </div>
+</section>

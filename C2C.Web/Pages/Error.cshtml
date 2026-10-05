@@ -1,0 +1,16 @@
+@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Something went wrong";
+}
+<section class="section">
+    <div class="wrap center">
+        <h1>Something went wrong.</h1>
+        <p class="lead">Sorry about that. Please try again, or call us at <a href="tel:+19057491164">905-749-1164</a>.</p>
+        @if (Model.ShowRequestId)
+        {
+            <p class="hint">Request ID: <code>@Model.RequestId</code></p>
+        }
+        <div class="btn-row center-row" ><a class="btn" href="/">Back to Home</a></div>
+    </div>
+</section>

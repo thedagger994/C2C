@@ -1,0 +1,46 @@
+@page "/projects"
+@model ProjectsModel
+@{
+    ViewData["Title"] = "Projects";
+    ViewData["Description"] = "A look at C2C Lead Engineering's work on bridges, highways, foundations and structures across Ontario.";
+}
+
+<section class="page-hero">
+    @Img.Tag("bridge-deck", "", "100vw", null, true)
+    <div class="wrap">
+        <p class="eyebrow">Our Projects</p>
+        <h1>Quality is Our Priority</h1>
+        <p>Our team on site: verifying, testing and engineering.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap">
+        <div class="grid cols-2">
+            <article class="card project-card reveal">
+                <div class="photo wide"><span class="badge">In Progress</span>@Img.Tag("overpass", "Highway overpass", "(max-width: 960px) 100vw, 560px")</div>
+            </article>
+            <article class="card project-card reveal">
+                <div class="photo wide"><span class="badge">In Progress</span>@Img.Tag("concrete-pour", "Concrete placement on a bridge deck", "(max-width: 960px) 100vw, 560px")</div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="section alt">
+    <div class="wrap">
+        <div class="reveal">
+            <p class="eyebrow">In the Field</p>
+            <h2>From the job site</h2>
+        </div>
+        <div class="gallery reveal">
+            <figure>@Img.Tag("drilling", "Soil investigation drilling", "(max-width: 600px) 50vw, 280px")<figcaption>Soil investigation</figcaption></figure>
+            <figure>@Img.Tag("formwork-inspection", "Formwork inspection", "(max-width: 600px) 50vw, 280px")<figcaption>Formwork inspection</figcaption></figure>
+            <figure>@Img.Tag("slump-test", "Concrete slump test", "(max-width: 600px) 50vw, 280px")<figcaption>Fresh concrete testing</figcaption></figure>
+            <figure>@Img.Tag("expansion-joint", "Bridge expansion joint", "(max-width: 600px) 50vw, 280px")<figcaption>Bridge expansion joint</figcaption></figure>
+            <figure class="span">@Img.Tag("bridge-deck", "Bridge deck reinforcement", "(max-width: 600px) 100vw, 560px")<figcaption>Bridge deck reinforcement</figcaption></figure>
+            <figure>@Img.Tag("rebar-cage", "Reinforcing steel cage", "(max-width: 600px) 50vw, 280px")<figcaption>Reinforcing steel</figcaption></figure>
+            <figure>@Img.Tag("rebar-crew", "Crew on a rebar structure", "(max-width: 600px) 50vw, 280px")<figcaption>High-rise rebar crew</figcaption></figure>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,95 @@
+@{
+    var path = Context.Request.Path.Value?.TrimEnd('/').ToLowerInvariant() ?? "";
+    string Active(string p) => path == p ? " aria-current=\"page\"" : "";
+    var title = ViewData["Title"] as string;
+    var fullTitle = string.IsNullOrEmpty(title) ? "Coast 2 Coast Lead Engineering Inc." : $"{title} | Coast 2 Coast Lead Engineering";
+    var desc = ViewData["Description"] as string
+        ?? "C2C Lead Engineering provides civil engineering design, quality verification, field testing and material inspection for infrastructure, buildings and construction. Based in Milton, Ontario.";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@fullTitle</title>
+    <meta name="description" content="@desc" />
+    <meta name="theme-color" content="#2b2622" />
+    <meta property="og:title" content="@fullTitle" />
+    <meta property="og:description" content="@desc" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://www.c2cleadengineering.ca/img/bridge-deck-1600.webp" />
+    <link rel="icon" type="image/png" href="~/img/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700;800&display=swap" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "ProfessionalService",
+      "name": "Coast 2 Coast Lead Engineering Inc.",
+      "url": "https://www.c2cleadengineering.ca",
+      "telephone": "+1-905-749-1164",
+      "email": "info@c2cleadengineering.ca",
+      "address": { "@@type": "PostalAddress", "streetAddress": "1254 Stirling Todd Terr", "addressLocality": "Milton", "addressRegion": "ON", "postalCode": "L9E 2E5", "addressCountry": "CA" },
+      "openingHours": "Mo-Fr 07:00-17:00",
+      "sameAs": ["https://www.linkedin.com/company/coast-2-coast-lead-engineering-inc/"]
+    }
+    </script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header" id="top">
+    <div class="wrap bar">
+        <a class="brand" href="/" aria-label="Coast 2 Coast Lead Engineering Inc. — home">
+            <img src="~/img/logo.png" alt="Coast 2 Coast Lead Engineering Inc." width="1000" height="454" />
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu"><span></span><span></span><span></span></button>
+        <nav id="nav" class="nav" aria-label="Main">
+            <a href="/"@Html.Raw(Active(""))>Home</a>
+            <a href="/services"@Html.Raw(Active("/services"))>Services</a>
+            <a href="/projects"@Html.Raw(Active("/projects"))>Projects</a>
+            <a href="/about-us"@Html.Raw(Active("/about-us"))>About Us</a>
+            <a href="/get-a-quote#contact">Contact Us</a>
+            <a class="btn btn-small" href="/get-a-quote#quote">Get a Quote</a>
+        </nav>
+    </div>
+</header>
+
+<main id="main">
+    @RenderBody()
+</main>
+
+<footer class="site-footer">
+    <div class="wrap footer-grid">
+        <div>
+            <img class="footer-logo" src="~/img/logo-light.png" alt="Coast 2 Coast Lead Engineering Inc." width="1000" height="454" loading="lazy" />
+            <p class="muted">Quality is Our Priority.</p>
+        </div>
+        <div>
+            <h2 class="eyebrow">Head Office</h2>
+            <address>
+                1254 Stirling Todd Terr<br />Milton, Ontario L9E 2E5<br />
+                <a href="tel:+19057491164">905-749-1164</a><br />
+                <a href="mailto:info@c2cleadengineering.ca">info@c2cleadengineering.ca</a>
+            </address>
+        </div>
+        <div>
+            <h2 class="eyebrow">Socials</h2>
+            <p><a href="https://www.linkedin.com/company/coast-2-coast-lead-engineering-inc/" target="_blank" rel="noopener">LinkedIn</a></p>
+        </div>
+        <div>
+            <h2 class="eyebrow">Work With Us</h2>
+            <p><a href="/get-a-quote#join">Join Our Team</a></p>
+            <p><a href="/get-a-quote#quote">Looking to get a quote from us? Inquiries</a></p>
+        </div>
+    </div>
+    <div class="wrap legal">
+        <span>&copy; @DateTime.Now.Year Coast 2 Coast Lead Engineering Inc. All rights reserved.</span>
+        <span><a href="/privacy">Privacy</a> &middot; <a href="#top">Back to Top</a></span>
+    </div>
+</footer>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

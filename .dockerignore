@@ -1,0 +1,5 @@
+**/bin
+**/obj
+**/App_Data
+_raw
+.git

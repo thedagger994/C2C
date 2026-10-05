@@ -1,0 +1,78 @@
+@page "/about-us"
+@model AboutUsModel
+@{
+    ViewData["Title"] = "About Us";
+    ViewData["Description"] = "Coast 2 Coast Lead Engineering Inc. is a privately owned professional engineering company in Milton, Ontario, founded by Mina Bassili, P.Eng.";
+}
+
+<section class="page-hero">
+    @Img.Tag("waterfront-aerial", "", "100vw", null, true)
+    <div class="wrap">
+        <p class="eyebrow">About Us</p>
+        <h1>Client Satisfaction is Our Priority</h1>
+        <p>Coast 2 Coast Lead Engineering Inc. originated in the Ontario GTA, poised to extend its services from the east coast to the west coast, emerging as a leading company in engineering services.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap split">
+        <div class="reveal">
+            <p class="eyebrow">Our Company</p>
+            <h2>Privately owned. Professionally engineered.</h2>
+            <p class="lead">Coast 2 Coast Lead Engineering Inc. (C2C) is a privately owned professional engineering company based in Milton, Ontario. Founded by Mina Bassili, P.Eng., we bring over 25 years of expertise in heavy civil construction, encompassing buildings, industrial facilities, commercial spaces, institutional projects, and the construction of bridges and roads/highways.</p>
+            <ul class="ticks">
+                <li>Registered with Professional Engineers Ontario (PEO)</li>
+                <li>Federal Incorporation status obtained</li>
+            </ul>
+        </div>
+        <div class="photo tall reveal">@Img.Tag("concrete-pour", "Crew placing concrete on a bridge deck", "(max-width: 960px) 100vw, 45vw")</div>
+    </div>
+</section>
+
+<section class="section alt">
+    <div class="wrap">
+        <div class="reveal">
+            <p class="eyebrow">Expertise</p>
+            <h2>Our areas of service</h2>
+        </div>
+        <ul class="chip-grid reveal">
+            <li>Structural Design and Analysis</li>
+            <li>Quality Verification</li>
+            <li>Technical Field Testing</li>
+            <li>Development of Engineering Procedures</li>
+            <li>Quality Audit</li>
+            <li>Material Inspections</li>
+            <li>Structural Rehabilitation</li>
+            <li>Geotechnical Science</li>
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap split flip">
+        <div class="reveal">
+            <p class="eyebrow">Leadership</p>
+            <h2>Managing Director</h2>
+            <div class="person">
+                <div class="monogram" aria-hidden="true">MB</div>
+                <div>
+                    <h3>Mina Bassili, P.Eng.</h3>
+                    <p>Managing Director &amp; Founder</p>
+                </div>
+            </div>
+            <div class="facts">
+                <div class="fact"><strong>Alberta &amp; Ontario</strong>Professional Engineering designation since 2021</div>
+                <div class="fact"><strong>Established 2022</strong>Coast 2 Coast Lead Engineering Inc.</div>
+            </div>
+        </div>
+        <div class="photo wide reveal">@Img.Tag("waterfront-aerial", "Aerial view of a landscaped waterfront development", "(max-width: 960px) 100vw, 50vw")</div>
+    </div>
+</section>
+
+<section class="cta-band">
+    <div class="wrap reveal">
+        <h2>Why settle for anything less than the best?</h2>
+        <p>Partner with Coast 2 Coast Lead Engineering to build something extraordinary.</p>
+        <div class="btn-row center-row" ><a class="btn btn-ghost" href="/get-a-quote#quote">Get a Quote</a></div>
+    </div>
+</section>

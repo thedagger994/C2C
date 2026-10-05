@@ -1,0 +1,134 @@
+@page "/get-a-quote"
+@model GetAQuoteModel
+@{
+    ViewData["Title"] = "Get a Quote & Contact";
+    ViewData["Description"] = "Request a quote from C2C Lead Engineering, contact our Milton, Ontario office, or join our team. Monday to Friday, 7AM to 5PM.";
+}
+
+<section class="page-hero">
+    @Img.Tag("formwork-inspection", "", "100vw", null, true)
+    <div class="wrap">
+        <p class="eyebrow">Get a Quote</p>
+        <h1>Request a Quote for Your Next Project</h1>
+        <p>We'll get back to you with an estimate.</p>
+    </div>
+</section>
+
+<section class="section" id="quote">
+    <div class="wrap split">
+        <div class="form-card reveal">
+            @if (Model.Sent == "quote")
+            {
+                <div class="alert ok" role="status">Thank you! Your request has been received. We'll get back to you with an estimate.</div>
+            }
+            <h2>Get a Quote</h2>
+            <form method="post" asp-page-handler="Quote">
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="q-first">First name <span class="req">*</span></label>
+                        <input id="q-first" type="text" asp-for="Quote.FirstName" autocomplete="given-name" required />
+                        <span class="err" asp-validation-for="Quote.FirstName"></span>
+                    </div>
+                    <div class="field">
+                        <label for="q-last">Last name <span class="req">*</span></label>
+                        <input id="q-last" type="text" asp-for="Quote.LastName" autocomplete="family-name" required />
+                        <span class="err" asp-validation-for="Quote.LastName"></span>
+                    </div>
+                    <div class="field">
+                        <label for="q-email">Email <span class="req">*</span></label>
+                        <input id="q-email" type="email" asp-for="Quote.Email" autocomplete="email" required />
+                        <span class="err" asp-validation-for="Quote.Email"></span>
+                    </div>
+                    <div class="field">
+                        <label for="q-phone">Phone <span class="req">*</span></label>
+                        <input id="q-phone" type="tel" asp-for="Quote.Phone" autocomplete="tel" required />
+                        <span class="err" asp-validation-for="Quote.Phone"></span>
+                    </div>
+                    <div class="field full">
+                        <label for="q-services">What are the services required? <span class="req">*</span></label>
+                        <textarea id="q-services" asp-for="Quote.ServicesRequired" required></textarea>
+                        <span class="err" asp-validation-for="Quote.ServicesRequired"></span>
+                    </div>
+                    <div class="field full">
+                        <label for="q-start">When are you looking to start?</label>
+                        <input id="q-start" type="text" asp-for="Quote.StartTiming" />
+                    </div>
+                    <div class="hp" aria-hidden="true"><label>Leave blank <input type="text" asp-for="Quote.Website" tabindex="-1" autocomplete="off" /></label></div>
+                    <div class="field full"><button class="btn" type="submit">Get a Quote</button></div>
+                </div>
+            </form>
+        </div>
+
+        <div class="reveal" id="contact">
+            <p class="eyebrow">Contact Us</p>
+            <h2>For any inquiries or questions contact us:</h2>
+            <ul class="contact-list">
+                <li><span class="k">Address</span><span>1254 Stirling Todd Terr, Milton, Ontario, L9E 2E5</span></li>
+                <li><span class="k">Office Hours</span><span>Monday - Friday: 7AM - 5PM</span></li>
+                <li><span class="k">Email</span><span><a href="mailto:tendering.C2C@gmail.com">tendering.C2C@gmail.com</a><br /><a href="mailto:info@c2cleadengineering.ca">info@c2cleadengineering.ca</a></span></li>
+                <li><span class="k">Phone</span><span><a href="tel:+19057491164">905-749-1164</a></span></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="section alt" id="join">
+    <div class="wrap split flip">
+        <div class="reveal">
+            <p class="eyebrow">Work With Us</p>
+            <h2>Become a Part of Our Team</h2>
+            <p class="lead">Join Our Team. Send us your company profile and tell us your field. We'll be in touch.</p>
+            <div class="photo wide">@Img.Tag("slump-test", "Technician performing a concrete slump test", "(max-width: 960px) 100vw, 40vw")</div>
+        </div>
+        <div class="form-card reveal">
+            @if (Model.Sent == "apply")
+            {
+                <div class="alert ok" role="status">Thank you! We've received your submission.</div>
+            }
+            <h2>Work With Us</h2>
+            <form method="post" asp-page-handler="Apply" enctype="multipart/form-data">
+                <div class="form-grid">
+                    <div class="field full">
+                        <label for="a-company">Company name <span class="req">*</span></label>
+                        <input id="a-company" type="text" asp-for="Apply.Company" autocomplete="organization" required />
+                        <span class="err" asp-validation-for="Apply.Company"></span>
+                    </div>
+                    <div class="field">
+                        <label for="a-email">Email <span class="req">*</span></label>
+                        <input id="a-email" type="email" asp-for="Apply.Email" autocomplete="email" required />
+                        <span class="err" asp-validation-for="Apply.Email"></span>
+                    </div>
+                    <div class="field">
+                        <label for="a-phone">Phone <span class="req">*</span></label>
+                        <input id="a-phone" type="tel" asp-for="Apply.Phone" autocomplete="tel" required />
+                        <span class="err" asp-validation-for="Apply.Phone"></span>
+                    </div>
+                    <div class="field full">
+                        <label for="a-field">Field <span class="req">*</span></label>
+                        <select id="a-field" asp-for="Apply.Field" required>
+                            <option value="">Select a field...</option>
+                            @foreach (var f in GetAQuoteModel.Fields) {<option value="@f" selected="@(Model.Apply.Field == f)">@f</option>}
+                        </select>
+                        <span class="err" asp-validation-for="Apply.Field"></span>
+                    </div>
+                    <div class="field full">
+                        <label for="a-profile">Company Profile <span class="req">*</span></label>
+                        <textarea id="a-profile" asp-for="Apply.Profile" required></textarea>
+                        <span class="err" asp-validation-for="Apply.Profile"></span>
+                    </div>
+                    <div class="field full">
+                        <span class="label">Upload File <span class="req">*</span></span>
+                        <div class="file-drop">
+                            <span class="pick">Choose file</span><span class="file-name">No file chosen</span>
+                            <input id="a-file" type="file" name="Apply.Upload" accept=".pdf,.doc,.docx" aria-label="Upload file" />
+                        </div>
+                        <span class="hint">PDF or Word, up to 10 MB.</span>
+                        <span class="err" asp-validation-for="Apply.Upload"></span>
+                    </div>
+                    <div class="hp" aria-hidden="true"><label>Leave blank <input type="text" asp-for="Apply.Website" tabindex="-1" autocomplete="off" /></label></div>
+                    <div class="field full"><button class="btn" type="submit">Submit</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

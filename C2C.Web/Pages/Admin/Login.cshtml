@@ -1,0 +1,19 @@
+@page "/admin/login"
+@model C2C.Web.Pages.Admin.LoginModel
+@{
+    ViewData["Title"] = "Admin sign in";
+}
+<section class="section">
+    <div class="wrap narrow form-card">
+        <h1>Admin</h1>
+        @if (Model.Error is not null) {<div class="alert bad" role="alert">@Model.Error</div>}
+        <form method="post">
+            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+            <div class="form-grid">
+                <div class="field full"><label for="u">Username</label><input id="u" type="text" name="username" autocomplete="username" required /></div>
+                <div class="field full"><label for="p">Password</label><input id="p" type="password" name="password" autocomplete="current-password" required /></div>
+                <div class="field full"><button class="btn" type="submit">Sign in</button></div>
+            </div>
+        </form>
+    </div>
+</section>
