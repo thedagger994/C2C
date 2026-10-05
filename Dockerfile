@@ -10,7 +10,6 @@ WORKDIR /app
 COPY --from=build /app .
 ENV ASPNETCORE_URLS=http://+:8080 \
     DataDir=/data
-VOLUME /data
 EXPOSE 8080
 USER $APP_UID
 ENTRYPOINT ["dotnet", "C2C.Web.dll"]
