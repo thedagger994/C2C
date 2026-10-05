@@ -42,7 +42,7 @@ builder.Services.AddRateLimiter(o =>
 {
     o.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
     o.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(ctx =>
-        HttpMethods.IsPost(ctx.Request.Method)
+        HttpMethods.IsPost(ctx.Request.Method) && !IsAdminAction(ctx)
             ? RateLimitPartition.GetFixedWindowLimiter(ctx.Connection.RemoteIpAddress?.ToString() ?? "unknown",
                 _ => new FixedWindowRateLimiterOptions { PermitLimit = 8, Window = TimeSpan.FromMinutes(10) })
             : RateLimitPartition.GetNoLimiter("get"));
@@ -90,8 +90,8 @@ app.UseStaticFiles(new StaticFileOptions
     }
 });
 app.UseRouting();
-app.UseRateLimiter();
 app.UseAuthentication();
+app.UseRateLimiter();
 app.UseAuthorization();
 
 app.MapGet("/robots.txt", () => Results.Text("User-agent: *\nDisallow: /admin\nSitemap: https://www.c2cleadengineering.ca/sitemap.xml\n", "text/plain"));
@@ -120,4 +120,13 @@ public static class AdminAuth
         var okPass = CryptographicOperations.FixedTimeEquals(H(pass), H(expectedPass));
         return okUser & okPass;
     }
+}
+
+public partial class Program
+{
+    // Signed-in admin actions (mark handled, sign out) are not throttled; the public forms and the login form are.
+    static bool IsAdminAction(HttpContext ctx) =>
+        ctx.Request.Path.StartsWithSegments("/admin")
+        && !ctx.Request.Path.StartsWithSegments("/admin/login")
+        && ctx.User.Identity?.IsAuthenticated == true;
 }
