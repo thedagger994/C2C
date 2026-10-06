@@ -25,7 +25,8 @@ Open http://localhost:5038. In Development the admin login is `admin` / `dev-onl
 | Variable | Purpose |
 |---|---|
 | `Admin__Username`, `Admin__Password` | Admin login. **If the password is empty, the admin is disabled.** |
-| `Smtp__Host`, `Smtp__Port`, `Smtp__User`, `Smtp__Password`, `Smtp__From`, `Smtp__To` | Email alerts on new submissions (`To` may be comma-separated). Without a host, submissions are still saved and visible in `/admin`. |
+| `Resend__ApiKey`, `Resend__From`, `Resend__To` | **Recommended** email alerts via the Resend web API (works where SMTP is blocked or Microsoft 365 password SMTP is disabled). `From` must be on a domain verified in Resend, e.g. `C2C Website <notifications@c2cleadengineering.ca>`; `To` may be comma-separated. |
+| `Smtp__Host`, `Smtp__Port`, `Smtp__User`, `Smtp__Password`, `Smtp__From`, `Smtp__To` | Alternative: plain SMTP alerts. Ignored if `Resend__ApiKey` is set. With neither configured, submissions are still saved and visible in `/admin`. |
 | `DataDir` | Folder for the SQLite DB and uploaded files (mount as a volume; default `App_Data`). |
 
 ## Deploy
