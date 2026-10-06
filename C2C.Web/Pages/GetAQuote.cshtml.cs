@@ -19,11 +19,11 @@ public class QuoteInput
 
 public class ApplyInput
 {
-    [Required(ErrorMessage = "Please enter your company name."), StringLength(160)] public string? Company { get; set; }
+    [Required(ErrorMessage = "Please enter your name."), StringLength(160)] public string? Company { get; set; }
     [Required(ErrorMessage = "Please enter your email."), EmailAddress(ErrorMessage = "Please enter a valid email."), StringLength(200)] public string? Email { get; set; }
     [Required(ErrorMessage = "Please enter your phone number."), StringLength(40)] public string? Phone { get; set; }
     [Required(ErrorMessage = "Please choose a field."), StringLength(120)] public string? Field { get; set; }
-    [Required(ErrorMessage = "Please tell us about your company."), StringLength(4000)] public string? Profile { get; set; }
+    [Required(ErrorMessage = "Please add your profile or LinkedIn link."), StringLength(4000)] public string? Profile { get; set; }
     [Required(ErrorMessage = "Please attach a file.")] public IFormFile? Upload { get; set; }
     public string? Website { get; set; } // honeypot
 }
@@ -93,7 +93,7 @@ public class GetAQuoteModel(AppDb db, Mailer mailer, IConfiguration config, ILog
         db.Applications.Add(a);
         await db.SaveChangesAsync();
         await mailer.NotifyAsync($"New 'Work With Us' submission from {a.Company}",
-            $"Company: {a.Company}\nEmail: {a.Email}\nPhone: {a.Phone}\nField: {a.Field}\nFile: {a.OriginalFileName} (download from the admin page)\n\nProfile:\n{a.Profile}", a.Email);
+            $"Name: {a.Company}\nEmail: {a.Email}\nPhone: {a.Phone}\nField: {a.Field}\nFile: {a.OriginalFileName} (download from the admin page)\n\nProfile/LinkedIn:\n{a.Profile}", a.Email);
         log.LogInformation("Stored application {Id} file {File}", a.Id, stored);
         return Done("apply");
     }

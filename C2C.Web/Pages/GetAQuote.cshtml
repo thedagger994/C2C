@@ -65,7 +65,7 @@
             <ul class="contact-list">
                 <li><span class="k">Address</span><span>1254 Stirling Todd Terr, Milton, Ontario, L9E 2E5</span></li>
                 <li><span class="k">Office Hours</span><span>Monday - Friday: 7AM - 5PM</span></li>
-                <li><span class="k">Email</span><span><a href="mailto:tendering.C2C@gmail.com">tendering.C2C@gmail.com</a><br /><a href="mailto:info@c2cleadengineering.ca">info@c2cleadengineering.ca</a></span></li>
+                <li><span class="k">Email</span><span><a href="mailto:info@c2cleadengineering.ca">info@c2cleadengineering.ca</a></span></li>
                 <li><span class="k">Phone</span><span><a href="tel:+19057491164">905-749-1164</a></span></li>
             </ul>
         </div>
@@ -77,7 +77,7 @@
         <div class="reveal">
             <p class="eyebrow">Work With Us</p>
             <h2>Become a Part of Our Team</h2>
-            <p class="lead">Join Our Team. Send us your company profile and tell us your field. We'll be in touch.</p>
+            <p class="lead">Join Our Team. Send us your profile or LinkedIn link and tell us your field. We'll be in touch.</p>
             <div class="photo wide">@Img.Tag("slump-test", "Technician performing a concrete slump test", "(max-width: 960px) 100vw, 40vw")</div>
         </div>
         <div class="form-card reveal">
@@ -89,8 +89,8 @@
             <form method="post" asp-page-handler="Apply" enctype="multipart/form-data">
                 <div class="form-grid">
                     <div class="field full">
-                        <label for="a-company">Company name <span class="req">*</span></label>
-                        <input id="a-company" type="text" asp-for="Apply.Company" autocomplete="organization" required />
+                        <label for="a-company">Name <span class="req">*</span></label>
+                        <input id="a-company" type="text" asp-for="Apply.Company" autocomplete="name" required />
                         <span class="err" asp-validation-for="Apply.Company"></span>
                     </div>
                     <div class="field">
@@ -112,7 +112,7 @@
                         <span class="err" asp-validation-for="Apply.Field"></span>
                     </div>
                     <div class="field full">
-                        <label for="a-profile">Company Profile <span class="req">*</span></label>
+                        <label for="a-profile">Profile/LinkedIn <span class="req">*</span></label>
                         <textarea id="a-profile" asp-for="Apply.Profile" required></textarea>
                         <span class="err" asp-validation-for="Apply.Profile"></span>
                     </div>

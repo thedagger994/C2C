@@ -2,7 +2,7 @@
 
 Rebuild of https://www.c2cleadengineering.ca (previously on Wix) as a full-stack ASP.NET Core 10 site.
 
-**Stack:** Razor Pages (server-rendered) · SQLite via EF Core · MailKit (email alerts) · cookie-auth admin inbox · Docker.
+**Stack:** Razor Pages (server-rendered) · SQLite via EF Core · Resend (email alerts) · cookie-auth admin inbox · Docker.
 
 ## Pages
 | URL | Content |
@@ -25,8 +25,7 @@ Open http://localhost:5038. In Development the admin login is `admin` / `dev-onl
 | Variable | Purpose |
 |---|---|
 | `Admin__Username`, `Admin__Password` | Admin login. **If the password is empty, the admin is disabled.** |
-| `Resend__ApiKey`, `Resend__From`, `Resend__To` | **Recommended** email alerts via the Resend web API (works where SMTP is blocked or Microsoft 365 password SMTP is disabled). `From` must be on a domain verified in Resend, e.g. `C2C Website <notifications@c2cleadengineering.ca>`; `To` may be comma-separated. |
-| `Smtp__Host`, `Smtp__Port`, `Smtp__User`, `Smtp__Password`, `Smtp__From`, `Smtp__To` | Alternative: plain SMTP alerts. Ignored if `Resend__ApiKey` is set. With neither configured, submissions are still saved and visible in `/admin`. |
+| `Resend__ApiKey`, `Resend__From`, `Resend__To` | Email alerts via the Resend web API (sends over HTTPS, so no mailbox password is stored). `From` must be on a domain verified in Resend, e.g. `C2C Website <notifications@c2cleadengineering.ca>`; `To` may be comma-separated. |
 | `DataDir` | Folder for the SQLite DB and uploaded files (mount as a volume; default `App_Data`). |
 
 ## Deploy
@@ -34,7 +33,7 @@ Open http://localhost:5038. In Development the admin login is `admin` / `dev-onl
 docker build -t c2c-website .
 docker run -d -p 8080:8080 -v c2c-data:/data \
   -e Admin__Password='<strong password>' \
-  -e Smtp__Host=smtp.example.com -e Smtp__User=... -e Smtp__Password=... -e Smtp__From=info@c2cleadengineering.ca \
+  -e Resend__ApiKey=... -e Resend__From="C2C Website <notifications@c2cleadengineering.ca>" -e Resend__To=info@c2cleadengineering.ca \
   c2c-website
 ```
 Put it behind an HTTPS reverse proxy / managed host (Azure App Service, Fly.io, Railway, Render, a VPS with Caddy). The app honours `X-Forwarded-*` headers.
